@@ -22,7 +22,6 @@ namespace TextHelper
             }
             inline void getTextBounds(const char *text, int16_t *x, int16_t *y, uint16_t *width, uint16_t *height) override
             {
-
                 *width = display.getStrWidth(text);
                 *height = display.getAscent();
                 *x = 0;
