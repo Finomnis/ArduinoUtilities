@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../utils/TimeHelpers.hpp"
+#include "TimeHelpers.hpp"
 
 #include <Arduino.h>
 

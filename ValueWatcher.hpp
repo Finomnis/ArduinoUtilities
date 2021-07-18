@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Arduino.h>
-
 #include "NoMoveNoCopy.hpp"
+
+#include <Arduino.h>
 
 template <typename T>
 class Value : NoMoveNoCopy
