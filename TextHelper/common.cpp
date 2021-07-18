@@ -35,33 +35,31 @@ namespace TextHelper
     namespace impl
     {
 
-        void getTextDimensions(TextWritingDisplay &display,
-                               const char *text,
-                               uint16_t *width,
-                               uint16_t *height)
+        void TextWritingDisplay::getTextDimensions(const char *text,
+                                                   uint16_t *width,
+                                                   uint16_t *height)
         {
             if (height == nullptr)
             {
                 int16_t start_x, start_y;
                 uint16_t dummy_height;
-                display.getTextBounds(text, &start_x, &start_y, width, &dummy_height);
+                this->getTextBounds(text, &start_x, &start_y, width, &dummy_height);
             }
             else
             {
                 int16_t start_x, start_y;
-                display.getTextBounds(text, &start_x, &start_y, width, height);
+                this->getTextBounds(text, &start_x, &start_y, width, height);
             }
         }
 
-        void setCursor(TextWritingDisplay &display,
-                       const char *text,
-                       int pos_x, int pos_y,
-                       HorizontalAlign align_h, VerticalAlign align_v,
-                       int *rendered_width, int *rendered_height)
+        void TextWritingDisplay::setCursor(const char *text,
+                                           int pos_x, int pos_y,
+                                           HorizontalAlign align_h, VerticalAlign align_v,
+                                           int *rendered_width, int *rendered_height)
         {
             int16_t start_x, start_y;
             uint16_t width, height;
-            display.getTextBounds(text, &start_x, &start_y, &width, &height);
+            this->getTextBounds(text, &start_x, &start_y, &width, &height);
 
             int absolute_top = getTop(pos_y, height, align_v);
             int absolute_left = getLeft(pos_x, width, align_h);
@@ -69,7 +67,7 @@ namespace TextHelper
             int cursor_x = absolute_left - start_x;
             int cursor_y = absolute_top - start_y;
 
-            display.setCursor(cursor_x, cursor_y);
+            this->setCursor(cursor_x, cursor_y);
 
             if (rendered_height != nullptr)
                 *rendered_height = height;
@@ -77,15 +75,14 @@ namespace TextHelper
                 *rendered_width = width;
         }
 
-        void drawText(TextWritingDisplay &display,
-                      const char *text,
-                      int pos_x, int pos_y,
-                      HorizontalAlign align_h, VerticalAlign align_v,
-                      int *rendered_width, int *rendered_height)
+        void TextWritingDisplay::drawText(const char *text,
+                                          int pos_x, int pos_y,
+                                          HorizontalAlign align_h, VerticalAlign align_v,
+                                          int *rendered_width, int *rendered_height)
         {
-            setCursor(display, text, pos_x, pos_y, align_h, align_v,
-                      rendered_width, rendered_height);
-            display.print(text);
+            this->setCursor(text, pos_x, pos_y, align_h, align_v,
+                            rendered_width, rendered_height);
+            this->print(text);
         }
     }
 }
