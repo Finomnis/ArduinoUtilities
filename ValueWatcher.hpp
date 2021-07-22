@@ -51,35 +51,35 @@ template <typename T>
 class ValueWatcher
 {
 public:
-    ValueWatcher(Value<T> const *parent)
-        : iteration_number{parent->get_iteration_number()},
+    ValueWatcher(Value<T> const &parent)
+        : iteration_number{parent.get_iteration_number()},
           parent{parent}
     {
     }
 
     bool new_value_available()
     {
-        bool result = iteration_number != parent->get_iteration_number();
+        bool result = iteration_number != parent.get_iteration_number();
         clear();
         return result;
     }
 
     const T &get()
     {
-        return parent->get();
+        return parent.get();
     }
 
     bool is_valid()
     {
-        return parent->is_valid();
+        return parent.is_valid();
     }
 
     void clear()
     {
-        iteration_number = parent->get_iteration_number();
+        iteration_number = parent.get_iteration_number();
     }
 
 private:
     uint64_t iteration_number;
-    Value<T> const *parent;
+    Value<T> const &parent;
 };
